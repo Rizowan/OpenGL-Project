@@ -3,7 +3,7 @@
 
 void init(){
     glClearColor(0,0,0,0);
-    glOrtho(-60, 60, -50, 50, -1, 1);
+    glOrtho(-60, 60, -40, 40, -1, 1);
 }
 
 void drawLine(float x1, float y1, float x2,float y2, float width){
@@ -16,7 +16,16 @@ glVertex2f(c, d);
 glEnd();
 glFlush();
 }
-
+void whiteLine(float x1, float y1, float x2,float y2, float width){
+    float a=x1, b=y1,c=x2,d=y2, w=width;
+glLineWidth(w);
+glColor3f(1.0, 1.0, 1.0);
+glBegin(GL_LINES);
+glVertex2f(a, b);
+glVertex2f(c, d);
+glEnd();
+glFlush();
+}
 void windowLine(float x1, float y1, float x2,float y2){
     float a=x1, b=y1,c=x2,d=y2;
 glLineWidth(3);
@@ -64,7 +73,7 @@ void brick(float x1,float y1,float x2,float y2,float x3, float y3, float x4, flo
     glFlush();
 }
 void wallOne(){
-    //walls
+    //walls white beneath
      drawQuad(-40,25, -40,-6, -20,-7, -20,28);
      drawQuad(-20,28, 3,19, 3,-6, -20,-7);
      drawQuad(3,19,3,-6,14,-6,14,21);
@@ -86,13 +95,13 @@ void wallOne(){
      brick(-21,23.5, -39,20.8, -39,19.3, -21,22);
 
      for(int i=1;i<=4;i++){
-        brick(-21,23.5-(5.7*i), -39,20.8-(5.7*i), -39,19.3-(5.7*i), -21,22-(5.7*i));
+        brick(-21,23.5-(5.7*i), -39,20.8-(5.3*i), -39,19.3-(5.3*i), -21,22-(5.7*i));
      }
 
      //under bottom white wall
      drawQuad(-21,22, -39,19.3, -39,18.3, -21,21);
      for(int i=1;i<=4;i++){
-        drawQuad(-21,22-(5.7*i), -39,19.3-(5.7*i), -39,18.3-(5.7*i), -21,21-(5.7*i));
+        drawQuad(-21,22-(5.7*i), -39,19.3-(5.3*i), -39,18.3-(5.3*i), -21,21-(5.7*i));
      }
      //window separator white
      drawQuad(-27,26,-28, 25.8,-28,-6,-27,-6.2);
@@ -114,12 +123,12 @@ void wallTwo(){
     //window bottom brick
     brick(-19,23.5, 2.5,15.5, 2.5,14.3, -19,22);
     for(int i=1; i<=4; i++){
-        brick(-19,23.5-(5.7*i), 2.5,15.5-(4.5*i), 2.5,14.3-(4.5*i), -19,22-(5.7*i));
+        brick(-19,23.5-(5.7*i), 2.5,15.5-(4.2*i), 2.5,14.3-(4.2*i), -19,22-(5.7*i));
     }
     //window bottom white separator
     drawQuad(-19,22, 2.5,14.4, 2.5,13.5, -19,21);
     for(int i=1; i<=4; i++){
-        drawQuad(-19,22-(5.7*i), 2.5,14.4-(4.5*i), 2.5,13.5-(4.5*i), -19,21-(5.7*i));
+        drawQuad(-19,22-(5.7*i), 2.5,14.4-(4.2*i), 2.5,13.5-(4.2*i), -19,21-(5.7*i));
     }
     //window separator white
     drawQuad(-11,23.6, -10,23.2, -10,-6.2,-11,-6.2);
@@ -131,35 +140,73 @@ void wallThree(){
 
     //window bottom brick
     brick(3.5,15.4, 7,16, 7,15, 3.5,14.4);
-    brick(3.5,15.4-(4.5), 7,16-(4.5), 7,15-(4.5), 3.5,14.4-(4.5));
+    brick(3.5,15.4-(4.2), 7,16-(4.2), 7,15-(4.2), 3.5,14.4-(4.2));
     brick(3.5,15.4-(4.5*2), 7,16-(4.5*2), 7,15-(4.6*2), 3.5,14.4-(4.5*2));
     brick(3.5,15.4-(4.5*3), 7,16-(4.5*3), 7,15-(4.6*3), 3.5,14.4-(4.5*3));
     brick(3.5,15.4-(4.5*4), 7,16-(4.6*4), 7,15-(4.6*4), 3.5,14.4-(4.5*4));
     //windows bottom white
     drawQuad(3.5,14.4, 13.5,16.2, 13.5,15.2, 3.5,13.4);
     for(int i=1; i<=4; i++){
-        drawQuad(3.5,14.4-(4.5*i), 13.5,16.2-(4.7*i), 13.5,15.2-(4.7*i), 3.5,13.4-(4.5*i));
+        drawQuad(3.5,14.4-(4.5*i), 13.5,16.2-(4.7*i), 13.5,15.2-(4.7*i), 3.5,13.4-(4.4*i));
     }
 
     //washroom windows
-    drawWindow(12.5,18, 13.5,17.8, 13.5,16.8, 12.5,16);
+    drawWindow(11,19, 12,19.2, 12,17.2, 11,17);
+    drawWindow(11,14, 12,14.2, 12,12.2, 11,12);
+    drawWindow(11,9, 12,9.2, 12,7.2, 11,7);
+    drawWindow(11,4.4, 12,4.6, 12,2.6, 11,2.4);
+    drawWindow(11,0.0, 12,0.2, 12,-1.6, 11,-1.8);
 
+}
+
+void wallFour(){
+    brick(14.5,20, 22,17.6, 22,-5.4,  14.5,-5.8);
+    drawWindow(23,17.3, 31,14.6, 31,-4.8, 23,-5.3);
+
+    //windows between washrooms
+    drawWindow(17.5,19, 19.5,18.4, 19.5,-5.4, 17.5,-5.3);
+    //blue window separator
+    windowLine(26,16.3, 26,-5);
+    windowLine(29,15.2, 29,-5);
+    //window bottom brick
+    brick(14.5,17.2, 14.5,16.2, 31,11.5, 31,12.5);
+    brick(14.5,17.2-4.7, 14.5,16.2-4.7, 31,11.5-3.9, 31,12.5-3.9);
+    brick(14.5,17.2-4.7*2, 14.5,16.2-4.7*2, 31,11.5-3.9*2, 31,12.5-3.9*2);
+    brick(14.5,17.2-4.7*3, 14.5,16.2-4.7*3, 31,11.5-3.8*3, 31,12.5-3.8*3);
+    brick(14.5,17.2-4.7*4, 14.5,16.2-4.7*4, 31,11.5-3.8*4, 31,12.5-3.8*4);
+    //window bottom white separator
+    drawQuad(14.5,16.2, 14.5,15.2, 31,10.5, 31,11.5 );
+    drawQuad(14.5,16.2-4.7, 14.5,15.2-4.7, 31,10.5-4, 31,11.5-4);
+    drawQuad(14.5,16.2-4.7*2, 14.5,15.2-4.7*2, 31,10.5-3.9*2, 31,11.5-3.9*2);
+    drawQuad(14.5,16.2-4.7*3, 14.5,15.2-4.7*3, 31,10.5-3.8*3, 31,11.5-3.8*3);
+    drawQuad(14.5,16.2-4.7*4, 14.5,15.2-4.7*4, 31,10.5-3.7*4, 31,11.5-3.7*4);
 }
 void draw(){
     glClear(GL_COLOR_BUFFER_BIT);
+     //SKy
+     glBegin(GL_QUADS);
+        glVertex2f(80, -3);
+        glColor3f(.96,.96,1);
+        glVertex2f(80, 80);
+        glColor3f(.25,.5,.90);
+        glVertex2f(-80, 80);
+        glColor3f(.85,.83,.8);
+        glVertex2f(-80, 3);
+    glEnd();
+    glFlush();
 
      wallOne();
      wallTwo();
      wallThree();
+     wallFour();
      //black lines
      drawLine(-20,28,-20,-7, 1);
      drawLine(3,19,3,-6, 1);
      drawLine(14,21,14,-6, 1);
-    glutSwapBuffers();
 }
 
 int main(){
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH | GLUT_MULTISAMPLE);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA | GLUT_DEPTH | GLUT_MULTISAMPLE);
     glEnable(GLUT_MULTISAMPLE);
     glutInitWindowSize(900, 700);
     glutInitWindowPosition(100, 100);
@@ -169,4 +216,3 @@ int main(){
     glutMainLoop();
     return 0;
 }
-
