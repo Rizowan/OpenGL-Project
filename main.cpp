@@ -5,7 +5,19 @@ void init(){
     glClearColor(0,0,0,0);
     glOrtho(-60, 60, -40, 40, -1, 1);
 }
-
+void sky(){
+    //SKy
+     glBegin(GL_QUADS);
+        glVertex2f(60, -3);
+        glColor3f(.6,.96,8);
+        glVertex2f(60, 60);
+        glColor3f(.10,.5,.70);
+        glVertex2f(-60, 60);
+        //glColor3f(.85,.83,.88);
+        glVertex2f(-60, 3);
+    glEnd();
+    glFlush();
+}
 void drawLine(float x1, float y1, float x2,float y2, float width){
     float a=x1, b=y1,c=x2,d=y2, w=width;
 glLineWidth(w);
@@ -49,6 +61,28 @@ void drawQuad(float x1,float y1,float x2,float y2,float x3, float y3, float x4, 
     glFlush();
 }
 
+void drawColorQuad(float x1,float y1,float x2,float y2,float x3, float y3, float x4, float y4, float Red, float Green, float Blue){
+    float a=x1,b=y1,c=x2,d=y2,e=x3,f=y3,g=x4,h=y4,rd=Red,gr=Green,bl=Blue;
+    glColor3f(rd, gr, bl);
+    glBegin(GL_QUADS);
+        glVertex2f(a, b);   //full quad with color
+        glVertex2f(c, d);
+        glVertex2f(e, f);
+        glVertex2f(g, h);
+    glEnd();
+    glFlush();
+}
+/////draw triangle//////////
+void drawTriangle(float x1,float y1,float x2,float y2,float x3,float y3, float Red, float Green, float Blue){
+    float a=x1,b=y1,c=x2,d=y2,e=x3,f=y3,re=Red,gr=Green,bl=Blue;
+    glColor3f(re,gr,bl);
+    glBegin(GL_TRIANGLES);
+        glVertex2f(a,b);
+        glVertex2f(c,d);
+        glVertex2f(e,f);
+    glEnd();
+    glFlush();
+}
 void drawWindow(float x1,float y1,float x2,float y2,float x3, float y3, float x4, float y4){
         float a=x1,b=y1,c=x2,d=y2,e=x3,f=y3,g=x4,h=y4;
     glColor3f(0.65f, .72f, .86f);
@@ -181,20 +215,36 @@ void wallFour(){
     drawQuad(14.5,16.2-4.7*3, 14.5,15.2-4.7*3, 31,10.5-3.8*3, 31,11.5-3.8*3);
     drawQuad(14.5,16.2-4.7*4, 14.5,15.2-4.7*4, 31,10.5-3.7*4, 31,11.5-3.7*4);
 }
+void lemonLime(){
+    //aud
+    drawColorQuad(33,1, 33.8,1, 33.8,-2, 33,-2,         .73,.1,.03);
+    drawColorQuad(40,1, 40.8,1, 40.8,-2, 40,-2,         .73,.1,.03); //pillars
+    drawColorQuad(31,1, 42,3.8, 52,3.5, 63,0,           .5,.2,.2);drawLine(31,1, 42,3.8, 1); drawLine(31,1, 63,0, 1); drawLine(52,3.5, 63,0, 1);
+    drawColorQuad(52,3.5, 57,3.2, 66,0, 63,0,            .5,.2,.2);
+    drawTriangle(39,3.5,  55,3.0, 47,6.8,               .5,.2,.2);drawLine(55,3.0, 47,6.8, 1);
+    drawColorQuad(47,6.8, 52,6.3, 58,3.2, 55,3.0,       .5,.2,.2);drawLine(58,3.2, 55,3.0, 1);
+    drawLine(40,3.5, 54,3.0, 1);
+    //canteen
+    drawTriangle(13,-2.4, 26,1, 35,-2.4, /*color*/ .16,.2,.21 );
+    drawColorQuad(26,1, 31,0.1, 40,-2.4, 35,-2.4,   .16,.2,.21 );
+    drawLine(26,1, 35,-2.4, 1);drawLine(13,-2.4, 26,1, 1);drawLine(13,-2.4, 35,-2.4, 1);
+    brick(16,-2.4, 32,-2.4, 32,-6.8, 16,-6);
+    brick(32,-2.4, 38.5,-2.4, 38.5,-5.8, 32,-6.8); drawLine(32,-2.4, 32,-6.8, 1); drawLine(16,-2.4,16,-6,1);
+    drawWindow(22,-3.1, 26,-3.1, 26,-5.8, 22,-5.7);
+    //sitting place
+    drawTriangle(35,-2.4, 48,.8, 61,-3, .16,.2,.21); drawLine(35,-2.4, 48,.8, 1); drawLine(48,.8, 61,-3, 1); drawLine(35,-2.4, 61,-3, 1);
+    //fence bottom
+    drawColorQuad(38,-2.4, 38.5,-2.4, 38.5,-6.8, 38,-6.8, .19,.16,.15);
+    drawColorQuad(50,-2.6, 50.5,-2.6, 50.5,-6.8, 50,-6.8, .19,.16,.15);
+    drawColorQuad(58,-2.7, 58.5,-2.7, 58.5,-6.8, 58,-6.8, .19,.16,.15);
+    brick(16,-6, 63,-7, 63,-8, 16,-7); drawLine(16,-6, 63,-7, 1); drawLine(63,-8, 16,-7, 1);
+
+
+}
 void draw(){
     glClear(GL_COLOR_BUFFER_BIT);
-     //SKy
-     glBegin(GL_QUADS);
-        glVertex2f(80, -3);
-        glColor3f(.96,.96,1);
-        glVertex2f(80, 80);
-        glColor3f(.25,.5,.90);
-        glVertex2f(-80, 80);
-        glColor3f(.85,.83,.8);
-        glVertex2f(-80, 3);
-    glEnd();
-    glFlush();
 
+     sky();
      wallOne();
      wallTwo();
      wallThree();
@@ -203,6 +253,8 @@ void draw(){
      drawLine(-20,28,-20,-7, 1);
      drawLine(3,19,3,-6, 1);
      drawLine(14,21,14,-6, 1);
+
+     lemonLime();
 }
 
 int main(){
