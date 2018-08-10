@@ -3,7 +3,7 @@
 
 void init(){
     glClearColor(0,0,0,0);
-    glOrtho(-60, 60, -40, 40, -1, 1);
+    glOrtho(-60, 60, -30, 50, -1, 1);
 }
 void sky(){
     //SKy
@@ -237,8 +237,25 @@ void lemonLime(){
     drawColorQuad(38,-2.4, 38.5,-2.4, 38.5,-6.8, 38,-6.8, .19,.16,.15);
     drawColorQuad(50,-2.6, 50.5,-2.6, 50.5,-6.8, 50,-6.8, .19,.16,.15);
     drawColorQuad(58,-2.7, 58.5,-2.7, 58.5,-6.8, 58,-6.8, .19,.16,.15);
-    brick(16,-6, 63,-7, 63,-8, 16,-7); drawLine(16,-6, 63,-7, 1); drawLine(63,-8, 16,-7, 1);
+    brick(16,-6, 63,-7, 63,-8, 16,-7); drawLine(16,-6, 63,-7, 1); //drawLine(63,-8, 16,-7, 1);
 
+
+}
+void grass(){
+    drawColorQuad(-20,-7, 3,-6, 16,-6, 3,-8, .21,.40,.15);
+    drawTriangle(16,-6, 3,-8, 16,-7, .21,.40,.15);
+    drawColorQuad(3,-8, 16,-7, 63,-8, 63,-10, .21,.40,.15);
+    drawColorQuad(-20,-7, -40,-6, -300,-60, -150,-50, .2,.55,.2);
+    glBegin(GL_QUADS);
+        glVertex2f(-20,-7);
+        glColor3f(.21,.31,.15);
+        glVertex2f(63,-10);
+        glColor3f(.18,.66,.24);
+        glVertex2f(60,-40);
+        glColor3f(.18,.66,.24);
+        glVertex2f(-150,-50);
+    glEnd();
+    glFlush();
 
 }
 void draw(){
@@ -255,6 +272,7 @@ void draw(){
      drawLine(14,21,14,-6, 1);
 
      lemonLime();
+     grass();
 }
 
 int main(){
