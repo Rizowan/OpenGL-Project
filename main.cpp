@@ -1,9 +1,69 @@
 #include<windows.h>
 #include<GL/glut.h>
-
+#include<math.h>
+#include<iostream>
 void init(){
     glClearColor(0,0,0,0);
-    glOrtho(-60, 60, -30, 50, -1, 1);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(-60, 60, -30, 50, -10, 10);
+}
+int a=0; float b=0,c=0,d=0,e=0,f=0,g=0,h=0,s=0;
+void animate(int v)
+{
+
+     a+=1;
+     if(a%2==0)
+        a=2;
+     else
+        a=1;
+     std::cout<<a<<std::endl;
+     b-=.099;
+
+     c-=.0070;
+
+     d-=.015;
+
+     e-=.06;
+
+    /* if(e<=-75)
+     {
+        e=53;
+     } */
+    glutPostRedisplay();
+    glutTimerFunc(100,animate,0);
+}
+
+void drawCircle(float x, float y, float radius){
+    glPointSize(3);
+    glBegin(GL_POLYGON);
+
+    for(float i=0;i<=7;i+=.01)
+        glVertex2f(x+radius*cos(i),y+radius*sin(i));
+    glEnd();
+}
+void cloud(float x, float y){
+    glColor3f(0.945, 0.956, 0.956);//light ash color
+    drawCircle(x-10.5,y+1,1);
+    drawCircle(x-8.5,y+2,1.5);
+    drawCircle(x-6,y+4,2.5);
+    drawCircle(x-4,y+2.5,2.5);
+    drawCircle(x-2,y+2,1.5);
+    drawCircle(x+2,y+2,2);
+    drawCircle(x+4,y+1.5,1.5);
+    drawCircle(x+6,y+1.5,1.2);
+    drawCircle(x+8,y+1.3,1.3);
+    drawCircle(x+10,y+1.2,.8);
+
+    //for straight line below
+    glColor3f(0.945, 0.956, 0.956);//light ash color
+    glBegin(GL_QUADS);
+    glVertex2f(x-9,y+2);
+    glVertex2f(x+8,y+2);
+    glColor3f(0.713, 0.8, 0.803);//dark ash color
+    glVertex2f(x+13,y);
+    glVertex2f(x-13,y);
+    glEnd();
 }
 void sky(){
     //SKy
@@ -249,7 +309,7 @@ void grass(){
     glBegin(GL_QUADS);
         glVertex2f(-20,-7);
         glColor3f(.21,.31,.15);
-        glVertex2f(63,-10);
+        glVertex2f(65,-10);
         glColor3f(.18,.66,.24);
         glVertex2f(60,-40);
         glColor3f(.18,.66,.24);
@@ -258,10 +318,23 @@ void grass(){
     glFlush();
 
 }
+void animCloud(){
+    glPushMatrix();
+    glTranslatef(0-e,0,0);
+    cloud(3,19);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(0+e,0,0);
+    cloud(30,35);
+    glPopMatrix();
+}
 void draw(){
-    glClear(GL_COLOR_BUFFER_BIT);
+     glClear(GL_COLOR_BUFFER_BIT);
 
      sky();
+     animCloud();
+
      wallOne();
      wallTwo();
      wallThree();
@@ -272,17 +345,22 @@ void draw(){
      drawLine(14,21,14,-6, 1);
 
      lemonLime();
+     glPushMatrix();
      grass();
+     glPopMatrix();
+     glFlush();
+
+     glutSwapBuffers();
 }
 
 int main(){
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA | GLUT_DEPTH | GLUT_MULTISAMPLE);
-    glEnable(GLUT_MULTISAMPLE);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutInitWindowSize(900, 700);
     glutInitWindowPosition(100, 100);
     glutCreateWindow("IUBAT");
     init();
     glutDisplayFunc(draw);
+    glutTimerFunc(100,animate,0);
     glutMainLoop();
     return 0;
 }

@@ -218,9 +218,11 @@
 	<stddef.h>
 	<GL/gl.h>
 
-1533921505 source:e:\audiodocs\projects\codeblocks\finalproject\opengl-project\main.cpp
+1534182533 source:e:\audiodocs\projects\codeblocks\finalproject\opengl-project\main.cpp
 	<windows.h>
 	<GL/glut.h>
+	<math.h>
+	<iostream>
 
 1508787081 c:\program files (x86)\codeblocks\mingw\include\sdl\sdl.h
 	"SDL_main.h"
