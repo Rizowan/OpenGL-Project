@@ -4,9 +4,7 @@
 #include<iostream>
 void init(){
     glClearColor(0,0,0,0);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glOrtho(-60, 60, -30, 50, -10, 10);
+    glOrtho(-50, 60, -30, 45, -10, 10);
 }
 int a=0; float b=0,c=0,d=0,e=0,f=0,g=0,h=0,s=0;
 void animate(int v)
@@ -17,7 +15,7 @@ void animate(int v)
         a=2;
      else
         a=1;
-     std::cout<<a<<std::endl;
+    // std::cout<<a<<std::endl;
      b-=.099;
 
      c-=.0070;
@@ -318,6 +316,175 @@ void grass(){
     glFlush();
 
 }
+
+void tree(GLdouble x, GLdouble y)
+{
+    //Tree leaves
+    glColor3f(0.082, 0.478, 0.172);
+    drawCircle(x,y,2);
+    glColor3f(0.584, 0.752, 0.129);
+    drawCircle(x-1,y-2,3);
+    drawCircle(x-3,y-0.3,3);
+    glColor3f(0.725, 0.858, 0.078);
+    drawCircle(x-4,y+1.5,3);
+    glColor3f(0.584, 0.752, 0.129);
+    drawCircle(x-3.1,y+3.5,3);
+    drawCircle(x-1.8,y+6.5,3.4);
+    glColor3f(0.725, 0.858, 0.078);
+    drawCircle(x+1.1,y+9.1,3);
+    glColor3f(0.584, 0.752, 0.129);
+    drawCircle(x+4,y+8,3);
+    drawCircle(x+3,y+3,4);
+    glColor3f(0.584, 0.752, 0.129);
+    drawCircle(x+6.2,y+3.5,3);
+    drawCircle(x+7.1,y+1.1,3);
+    drawCircle(x+6.5,y-1,3);
+    drawCircle(x+5,y-1.5,3);
+    glColor3f(0.725, 0.858, 0.078);
+    drawCircle(x+3.2,y-3.8,2.4);
+    drawCircle(x+2.2,y-3.8,2.4);
+    glColor3f(0.439, 0.631, 0.211);
+    drawCircle(x+4,y+4.5,3.8);
+    glColor3f(0.725, 0.858, 0.078);
+    drawCircle(x+2.8,y+5.5,3.8);
+    drawCircle(x+1.5,y+5.0,2);
+    glColor3f(0.647, 0.776, 0.223);
+    drawCircle(x+1.0,y+5.3,2.8);
+    drawCircle(x+0.9,y+4.9,1.8);
+
+    glColor3f(0.662, 0.298, 0.078);//tree branch
+    glBegin(GL_QUADS);
+    glVertex2f(x+1.5,y+2);
+    glVertex2f(x+2.5,y+2);
+    glVertex2f(x+3.0,y-12);
+    glVertex2f(x+1.0,y-12);
+    glEnd();
+
+    glColor3f(0.662, 0.298, 0.078);//2nd branch
+    glBegin(GL_QUADS);
+    glVertex2f(x+2.5,y-2);
+    glVertex2f(x+2.5,y-3);
+    glVertex2f(x+5.8,y+1);
+    glVertex2f(x+5.8,y+1);
+    glEnd();
+
+    glColor3f(0.662, 0.298, 0.078);//1st branch
+    glBegin(GL_QUADS);
+    glVertex2f(x+2.5,y+0);
+    glVertex2f(x+2.5,y-0.8);
+    glVertex2f(x+3.5,y+1);
+    glVertex2f(x+4,y+1);
+    glEnd();
+
+    glColor3f(0.662, 0.298, 0.078);//left 1st branch
+    glBegin(GL_QUADS);
+    glVertex2f(x+1.4,y+0);
+    glVertex2f(x+1.5,y-1);
+    glVertex2f(x+0.5,y+0.5);
+    glVertex2f(x+0.2,y-0.01);
+    glEnd();
+
+    glColor3f(0.662, 0.298, 0.078);//left 2nd branch
+    glBegin(GL_QUADS);
+    glVertex2f(x+2.5,y-2);
+    glVertex2f(x+2.5,y-3);
+    glVertex2f(x-0.2,y-0.2);
+    glVertex2f(x-0.3,y-0.8);
+    glEnd();
+
+}
+
+void tallTree(GLdouble x,GLdouble y)
+{
+    glColor3f(0.262, 0.741, 0.156);
+    drawCircle(x+0,y+5,2);
+    drawCircle(x-2,y+3,2);
+    drawCircle(x-4,y+1,2);
+    drawCircle(x-6,y-1,2);
+
+    drawCircle(x+0,y+1,2);
+    drawCircle(x-1.9,y+0,2);
+    drawCircle(x+1.9,y+0,2);
+
+
+    drawCircle(x+2,y+3,2);
+    drawCircle(x+4,y+1,2);
+    drawCircle(x+6,y-1,2);
+
+    glColor3f(0.262, 0.741, 0.156);
+    glBegin(GL_QUADS);
+    glVertex2f(x-4,y-1);
+    glVertex2f(x-6,y-3);
+    glVertex2f(x+6,y-3);
+    glVertex2f(x+4,y-1);
+    glEnd();
+
+    glColor3f(0.662, 0.298, 0.078);
+    glBegin(GL_QUADS);
+    glVertex2f(x-1,y-3);
+    glVertex2f(x-1.5,y-6);
+    glVertex2f(x+1.5,y-6);
+    glVertex2f(x+1,y-3);
+    glEnd();
+}
+
+void drawTree(){
+    glPushMatrix();
+    glScalef(.5,1.3,0);
+    tallTree(25,1);
+    glPopMatrix();
+    //trees under windows
+    glPushMatrix();
+    glScalef(.15,.20,0);
+    tallTree(-285,-32);
+    glPopMatrix();
+
+    glPushMatrix();
+    glScalef(.15,.20,0);
+    tallTree(-330,-37);
+    glPopMatrix();
+
+    glPushMatrix();
+    glScalef(.15,.20,0);
+    tallTree(0,-28);
+    glPopMatrix();
+
+    glPushMatrix();
+    glScalef(.15,.20,0);
+    tallTree(-30,-30);
+    glPopMatrix();
+
+    glPushMatrix();
+    glScalef(.15,.20,0);
+    tallTree(-200,-29);
+    glPopMatrix();
+
+    glPushMatrix();
+    glScalef(.15,.20,0);
+    tallTree(-180,-30);
+    glPopMatrix();
+    //big trees
+    glPushMatrix();
+    glScalef(.7,.5,0);
+    tree(45,-.8);
+    glPopMatrix();
+
+    glPushMatrix();
+    glScalef(1.1, .8, 0);
+    tree(50,2);
+    glPopMatrix();
+
+    glPushMatrix();
+    glScalef(1.1, .8, 0);
+    tree(-45,-2.5);
+    glPopMatrix();
+}
+void fence(){
+    drawColorQuad(-41,-6, -19,-6.5, -19,-7.5, -41,-7, .45,.43,.35);
+    drawColorQuad(-19,-6.5, 3.5,-5.8, 3.5,-6.8, -19,-7.5, .45,.43,.35);
+    drawColorQuad(3.5,-5.8, 11,-6, 11,-7, 3.5,-6.8, .45,.43,.35);
+    drawColorQuad(11,-6, 15.5,-6, 15.5,-7, 11,-7, .45,.43,.35);
+}
 void animCloud(){
     glPushMatrix();
     glTranslatef(0-e,0,0);
@@ -334,7 +501,6 @@ void draw(){
 
      sky();
      animCloud();
-
      wallOne();
      wallTwo();
      wallThree();
@@ -348,7 +514,9 @@ void draw(){
      glPushMatrix();
      grass();
      glPopMatrix();
-     glFlush();
+     drawTree();
+     fence();
+
 
      glutSwapBuffers();
 }
