@@ -617,9 +617,14 @@
 	"begin_code.h"
 	"close_code.h"
 
-1534315054 source:e:\projects\opengl-project\main.cpp
+1559582886 source:e:\projects\opengl-project\main.cpp
 	<windows.h>
-	<GL/glut.h>
+	<glut.h>
 	<math.h>
 	<iostream>
+
+976692172 c:\program files (x86)\codeblocks\mingw\include\glut.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
 
