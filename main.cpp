@@ -1,5 +1,5 @@
 #include<windows.h>
-#include<GL/glut.h>
+#include<glut.h>
 #include<math.h>
 #include<iostream>
 void init(){
